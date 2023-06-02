@@ -1,41 +1,30 @@
 ---
-title: Short Paper
-subtitle: A Short Subtitle
+title: Climate predictor selection and variable reduction methods influence MaxEnt model performance and predictions of climatic suitability 
 author:
-  - name: Alice Anonymous
-    email: alice@example.com
+  - name: Clarke van Steenderen
+    email: vsteenderen@gmail.com
     affiliations: 
         - id: some-tech
-          name: Some Institute of Technology
-          department: Department Name
-          address: Street Address
-          city: City
-          state: State
-          postal-code: Postal Code
+          name: Center for Biological Control, Department of Zoology and Entomology
+          department: Rhodes University
+          address: 
+          city: Makhanda
+          state: South Africa
+          postal-code: 6140
     attributes:
-        corresponding: true
-    note: This is the first author footnote.
-  - name: Bob Security
-    email: bob@example.com
+        corresponding: false
+  - name: Guy F. Sutton
+    email: g.sutton@ru.ac.za
     affiliations:
         - id: another-u
-          name: Another University
-          department: Department Name
-          address: Street Address
-          city: City
-          state: State
-          postal-code: Postal Code
-    note: |
-      Another author footnote, this is a very long footnote and it should be a really long footnote. But this footnote is not yet sufficiently long enough to make two lines of footnote text.
-  - name: Cat Memes
-    email: cat@example.com
-    affiliations:
-        - ref: another-u
-    note: Yet another author footnote.
-  - name: Derek Zoolander
-    email: derek@example.com
-    affilations:
-        - ref: some-tech
+          name: Center for Biological Control, Department of Zoology and Entomology
+          department: Rhodes University
+          address: 
+          city: Makhanda
+          state: South Africa
+          postal-code: 6140
+    attributes:
+        corresponding: true
 abstract: |
   This is the abstract. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum augue turpis, dictum non malesuada a, volutpat eget velit. Nam placerat turpis purus, eu tristique ex tincidunt et. Mauris sed augue eget turpis ultrices tincidunt. Sed et mi in leo porta egestas. Aliquam non laoreet velit. Nunc quis ex vitae eros aliquet auctor nec ac libero. Duis laoreet sapien eu mi luctus, in bibendum leo molestie. Sed hendrerit diam diam, ac dapibus nisl volutpat vitae. Aliquam bibendum varius libero, eu efficitur justo rutrum at. Sed at tempus elit.
 keywords: 
@@ -47,75 +36,47 @@ format:
   elsevier-pdf:
     keep-tex: true
     journal:
-      name: Journal Name
+      name: Ecological Modelling
       formatting: preprint
       model: 3p
-      cite-style: super
+      layout: twocolumn
+      cite-style: authoryear
+      highlights:
+        - Highlight 1
+        - Highlight 2 
+        - Highlight 3
 ---
 
-Please make sure that your manuscript follows the guidelines in the 
-Guide for Authors of the relevant journal. It is not necessary to 
-typeset your manuscript in exactly the same way as an article, 
-unless you are submitting to a camera-ready copy (CRC) journal.
+# Introduction 
 
-For detailed instructions regarding the elsevier article class, see   <https://www.elsevier.com/authors/policies-and-guidelines/latex-instructions>
+Ecological models are important tools to aid the development and implementation of environmental policies and management programmes [@Addison2013; @Schuwirth2019; @Sutton2022]. These models are used for conservation planning [@Guisan2013], predicting the establishment and spread of invasive species [@Martin2020], implementing biological control programmes [@Sutton2019b; @Mukherjee2021], and forecasting species responses to environmental change [@Bocedi2014], amongst other applications. Species distribution models (SDM’s) are an example of ecological models that have become increasingly popular in recent years [@Elith2009]. SDM’s typically take the form of correlative or mechanistic models that correlate species presence/absences (or pseudo-absences) to environmental covariates to identify suitable climatic conditions for the study taxon [@Elith2011]. The Maximum Entropy species distribution model (hereafter ‘MaxEnt’) is amongst the most popular methods for climate modelling studies and has been shown to perform well compared to alternative modelling algorithms [@Wisz2008; @Phillips2017]. It uses maximum entropy to distinguish between environmental conditions where the focal taxon is present from environmental conditions at sites without confirmed presence records for the taxon [@Elith2011].
 
-# Bibliography styles
+In recent years, a number of studies have investigated and demonstrated that computational choices made during the model building process can have a significant influence on resulting model outputs and inferences drawn [@Warren2011; @Webber2011; @Shcheglovitova2013; @Boria2017; @Sutton2022]. Despite its importance in the model building process, covariate selection methods have received considerably little attention to date [but see @Austin2011; @Fourcade2018; @Adde2023], whereby covariate selection refers to "identify[ing] the best subset of covariates out of a panel of many candidates, both from an ecological and statistical perspective [see @Adde2023 and references therein]. 
 
-Here are two sample references:  @Feynman1963118 @Dirac1953888.
 
-By default, natbib will be used with the `authoryear` style, set in `classoption` variable in YAML. 
-You can sets extra options with `natbiboptions` variable in YAML header. Example 
 
-```
-natbiboptions: longnamesfirst,angle,semicolon
-```
 
-There are various more specific bibliography styles available at
-<https://support.stmdocs.in/wiki/index.php?title=Model-wise_bibliographic_style_files>. 
-To use one of these, add it in the header using, for example, `biblio-style: model1-num-names`.
 
-## Using CSL 
 
-If `cite-method` is set to `citeproc` in `elsevier_article()`, then pandoc is used for citations instead of `natbib`. In this case, the `csl` option is used to format the references. By default, this template will provide an appropriate style, but alternative `csl` files are available from <https://www.zotero.org/styles?q=elsevier>. These can be downloaded
-and stored locally, or the url can be used as in the example header.
 
-# Equations
 
-Here is an equation:
-$$ 
-  f_{X}(x) = \left(\frac{\alpha}{\beta}\right)
-  \left(\frac{x}{\beta}\right)^{\alpha-1}
-  e^{-\left(\frac{x}{\beta}\right)^{\alpha}}; 
-  \alpha,\beta,x > 0 .
-$$
 
-Inline equations work as well: $\sum_{i = 2}^\infty\{\alpha_i^\beta\}$
 
-# Figures and tables
 
-@fig-meaningless is generated using an R chunk.
 
-```{r}
-#| label: fig-meaningless
-#| fig-cap: A meaningless scatterplot
-#| fig-width: 5
-#| fig-height: 5
-#| fig-align: center
-#| out-width: 50%
-#| echo: false
-plot(runif(25), runif(25))
-```
 
-# Tables coming from R
 
-Tables can also be generated using R chunks, as shown in @tbl-simple example.
 
-```{r}
-#| label: tbl-simple
-#| tbl-cap: Caption centered above table
-#| echo: true
-knitr::kable(head(mtcars)[,1:4])
-```
 
-# References {-}
+
+
+
+
+
+
+
+
+
+
+
+
