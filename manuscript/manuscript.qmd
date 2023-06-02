@@ -47,17 +47,48 @@ format:
         - Highlight 3
 ---
 
-# Introduction 
+# 1. Introduction 
 
 Ecological models are important tools to aid the development and implementation of environmental policies and management programmes [@Addison2013; @Schuwirth2019; @Sutton2022]. These models are used for conservation planning [@Guisan2013], predicting the establishment and spread of invasive species [@Martin2020], implementing biological control programmes [@Sutton2019b; @Mukherjee2021], and forecasting species responses to environmental change [@Bocedi2014], amongst other applications. Species distribution models (SDM’s) are an example of ecological models that have become increasingly popular in recent years [@Elith2009]. SDM’s typically take the form of correlative or mechanistic models that correlate species presence/absences (or pseudo-absences) to environmental covariates to identify suitable climatic conditions for the study taxon [@Elith2011]. The Maximum Entropy species distribution model (hereafter ‘MaxEnt’) is amongst the most popular methods for climate modelling studies and has been shown to perform well compared to alternative modelling algorithms [@Wisz2008; @Phillips2017]. It uses maximum entropy to distinguish between environmental conditions where the focal taxon is present from environmental conditions at sites without confirmed presence records for the taxon [@Elith2011].
 
 In recent years, a number of studies have investigated and demonstrated that computational choices made during the model building process can have a significant influence on resulting model outputs and inferences drawn [@Warren2011; @Webber2011; @Shcheglovitova2013; @Boria2017; @Sutton2022]. Despite its importance in the model building process, covariate selection methods have received considerably little attention to date [but see @Austin2011; @Fourcade2018; @Adde2023], whereby covariate selection refers to "identify[ing] the best subset of covariates out of a panel of many candidates, both from an ecological and statistical perspective [see @Adde2023 and references therein]. 
 
+**Next paragraphs** 
+
+- Review current methods used to select variables, e.g. R2, VIF, PCA, expert opinion, and most recently, automated selection / model-based selection. 
+
+- Aims of this paper are to show how variable selection can influence model outputs and inferences. 
+
+# 2. Methods and materials 
+
+
+
+# 3. Results
+
+
+# 4. Discussion 
 
 
 
 
 
+
+# Declaration of Competing Interest 
+
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+# Data availability 
+
+All data and code required to reproduce the analyses are available in a public GitHub repository: https://github.com/guysutton/MS_climate_variable_selection_sdm
+
+# Acknlowedgements 
+
+CVS and GFS acknowledge funding from the South African Working for Water (WfW) programme of the Department of Forestry, Fisheries and the Environment: Natural Resource Management Programmes (DFFE: NRMP). Funding was also provided by the South African Research Chairs Initiative of the Department of Science and Technology and the National Research Foundation (NRF) of South Africa. Any opinions, finding, conclusions or recommendations expressed in this material are those of the authors and the NRF does not accept any liability in this regard.
+
+# Supplementary materials 
+
+
+# References 
 
 
 
