@@ -61,6 +61,44 @@ In recent years, a number of studies have investigated and demonstrated that com
 
 # 2. Methods and materials 
 
+### 2.1. Species occurrence records
+
+### 2.2. Environmental predictors
+
+Climate data were obtained by downloading the standard set of 19 bioclimatic variables from the WorldClim ver. 2.1 database (Fick and Hijmans, 2017) (data available at: www.worldclim.org/download. html). This dataset is representative of annual and seasonal means and variation of temperature and precipitation metrics averaged over the 1950–2000 time period (current climate) at a 2.5 min resolution. These variables have been shown to effectively model the climatic suitability for non-native insects (e.g., Trethowan et al., 2011). 
+
+### 2.3. Model calibration 
+
+MaxEnt (ver. 3.4.3) was implemented in the ‘ dismo’ R package (Hijmans et al., 2021 ).
+
+Given that MaxEnt is a presence/pseudo-absence modelling algorithm, model calibration requires a user-defined geographic background to sample the climate of representative grid cells where the focal species is assumed to be absent (i.e., background points or pseudo-absences). Background definition can have a significant effect on model output (VanDerWal et al., 2009). The background should ideally represent the geographic areas available to the focal species, omitting areas where species absence is due to historical factors, dispersal constraints and/or biotic interactions (Sanin and Anderson, 2018). Following Webber et al. (2011), we defined the model background using the Koppen-Geiger climate classification system (available at: http://koeppen-geiger.vu-w ien.ac.at). Only Koppen-Geiger climate zones that contained at least one native-range occurrence record for D. rubiformis in Australia were used as the background area from which background points were drawn for model calibration (Fig. 1a). The Koppen-Geiger climate zones were intersected with the occurrence records using the ‘ raster’ R package (Hijmans, 2022). We randomly sampled 10 000 points (the default number used for Maxent; Merow et al. (2013) ) from within this background definition using the ‘dismo’ R package (Hijmans et al., 2021).
+
+MaxEnt models were parameterised with default settings for multiple parameters, including: convergence = 105, maximum number of iterations = 500 and prevalence = 0.5. The ‘fade by clamping’ option was selected to prevent extrapolation well outside the range of climatic values in the model training area (Philips et al., 2017 ). Model predictions were obtained using the ‘logistic output’ to create continuous climatic suitability raster layers scaled between 0 (climatically unsuitable) and 1 (climatically suitable).
+
+### 2.4. Model evaluation 
+
+Model tuning experiments were applied to the native-range MaxEnt models to derive within-sample evaluation metrics to guide the selection of optimal MaxEnt parameter configurations (feature classes and regularisation multipliers). Optimised parameter configurations would then be used to refit the MaxEnt models before being projected into a novel geographic region and making projections of climatic suitability for D. rubiformis . Model tuning was performed by building MaxEnt models with varying (1) feature class combinations (H = Hinge only, L = Linear only, LQ = Linear and Quadratic and LQH = Linear, Quadratic and Hinge features) and (2) regularisation multipliers (1:8). In total, 32 MaxEnt models were specified. Native-range model performance and optimal parameter configurations were assessed using 4-fold spatial block cross validation using ‘ENMeval’ (Kass et al., 2021). 
+
+Optimal parameter configurations were assessed using multiple metrics that reflect different aspects of model performance. Four metrics were calculated, including: (1) discriminatory ability (AUCtest), (2) overfitting (AUCdiff), (3) omission rates (OR10), and (4) overall parsimony (AICc). The use of AUC analyses for assessing the fit of MaxEnt models has been criticised for a variety of reasons (see Lobo et al., 2008; Peterson et al., 2008 ). However, AUC metrics are arguably the most widely used metrics to evaluate MaxEnt model performance, and as such, we believe it is important to include them in our evaluation, and contrast the results obtained using AUC versus other metrics.
+
+We specified five final MaxEnt models, four models calibrated with FC and RM values that optimised model performance based on the metricsdiscussed below, and a MaxEnt model calibrated with default FC and RM values. Our intention was to compare MaxEnt model predictions and perfor mance depending on which metric was used to select optimal parameter configurations relative to the default MaxEnt settings. 
+
+(1) AUC test assesses the model ’s ability to discriminate between predicted presence at withheld portions of the data used to test the model versus pseudo-absence points. An AUC of less than 0.8 is considered a poor model, between 0.8 and 0.9 is a fair model, between 0.9 and 0.995 a good model, and > 0.995 an excellent model (Fielding and Bell, 1997). Thus, higher AUCtest values indicate increased ability to discriminate between testing and background points.
+
+(2) AUC diff is the difference between AUC values calculated on training points only (AUCtrain) and AUCtest [see (1) AUCtest above for details] (Warren and Seifert, 2011). Thus, higher AUCdiff values indicate whether the MaxEnt model is overfit on the training data, and thus, may perform poorly when evaluated against testing points. 
+
+(3) OR 10 is the 10% training omission rate (Boria et al., 2014 ). Overfit models have omission rates higher than the theoretical expectation for the threshold applied (Shcheglovitova and Anderson, 2013). As such, the OR 10 criterion selected models calibrated with MaxEnt settings which best approximated the expected 0.10 omission rate. Models with omission rates increasingly higher than the expected value were considered to have a higher degree of overfit (Boria et al., 2017). 
+
+(4) The Akaike Information Criterion corrected for small sample sizes (AICc) criterion simultaneously scores models according to their complexity and goodness-of-fit. AICc was used as the primary evaluation metric as it is calculated using MaxEnt models built using the entire species occurrence dataset (i.e. all the occurrence points in the native-range), unlike AUC and OR10 (and numerous other metrics frequently used for model evaluation) which may be spatially biased due to the partitioning of the species occurrence dataset into training and evaluation sets (Sanin and Anderson, 2018). Optimal parameter configurations were determined by selecting model configurations which produced the lowest value for AICc (i.e., AICc=0; following Kass et al. (2021)).
+
+### 2.5. Model visualisation 
+
+- Need to discuss how we map the different rasters, and maybe how we quantified the difference in suitability projections between climate layers? 
+
+
+
+
+All modelling and statistical analyses were conducted in R ver. 4.0.3 (R Core Team, 2020). All values presented in text are presentedas mean ± standard error, unless otherwise stated. A standardised ODMAP methods protocol (Overview, Data, Model, Assessment, and Prediction) has been completed for this study and can be found in Supplementary File S1. ODMAP standardises the reporting of SDM modelling studies to improve transparency and reproducibility (Zurell et al., 2020).
 
 
 # 3. Results
