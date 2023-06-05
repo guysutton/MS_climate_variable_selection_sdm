@@ -7,7 +7,7 @@
   authoryear,
   preprint,
   3p,
-  twocolumn]{elsarticle}
+  onecolumn]{elsarticle}
 
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
@@ -127,26 +127,6 @@
 \makeatother
 \makeatletter
 \makeatother
-\usepackage{float}
-\makeatletter
-\let\oldlt\longtable
-\let\endoldlt\endlongtable
-\def\longtable{\@ifnextchar[\longtable@i \longtable@ii}
-\def\longtable@i[#1]{\begin{figure}[H]
-\onecolumn
-\begin{minipage}{0.5\textwidth}
-\oldlt[#1]
-}
-\def\longtable@ii{\begin{figure}[H]
-\onecolumn
-\begin{minipage}{0.5\textwidth}
-\oldlt
-}
-\def\endlongtable{\endoldlt
-\end{minipage}
-\twocolumn
-\end{figure}}
-\makeatother
 \journal{Ecological Modelling}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
@@ -159,7 +139,8 @@
 \hypersetup{
   pdftitle={Climate predictor selection and variable reduction methods influence MaxEnt model performance and predictions of climatic suitability},
   pdfauthor={Clarke van Steenderen; Guy F. Sutton},
-  pdfkeywords={keyword1, keyword2},
+  pdfkeywords={Species distribution model, Variable
+selection, Ecological model, WORLDCLIM},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -211,11 +192,12 @@ tempus elit.
 
 
 \begin{keyword}
-    keyword1 \sep 
-    keyword2
+    Species distribution model \sep Variable selection \sep Ecological
+model \sep 
+    WORLDCLIM
 \end{keyword}
 \end{frontmatter}
-    \ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, breakable, enhanced, interior hidden, sharp corners, frame hidden, boxrule=0pt]}{\end{tcolorbox}}\fi
+    \ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, sharp corners, boxrule=0pt, enhanced, interior hidden]}{\end{tcolorbox}}\fi
 
 \hypertarget{introduction}{%
 \section{1. Introduction}\label{introduction}}
@@ -234,9 +216,9 @@ SDM's typically take the form of correlative or mechanistic models that
 correlate species presence/absences (or pseudo-absences) to
 environmental covariates to identify suitable climatic conditions for
 the study taxon \citep{Elith2011}. The Maximum Entropy species
-distribution model (hereafter `MaxEnt') is amongst the most popular
-methods for climate modelling studies and has been shown to perform well
-compared to alternative modelling algorithms
+distribution model (hereafter `\emph{MaxEnt}') is amongst the most
+popular methods for climate modelling studies and has been shown to
+perform well compared to alternative modelling algorithms
 \citep{Wisz2008, Phillips2017}. It uses maximum entropy to distinguish
 between environmental conditions where the focal taxon is present from
 environmental conditions at sites without confirmed presence records for
@@ -254,75 +236,135 @@ selection refers to ``identify{[}ing{]} the best subset of covariates
 out of a panel of many candidates, both from an ecological and
 statistical perspective \citep[see][ and references therein]{Adde2023}.
 
-\textbf{Next paragraphs}
+The methods used for selecting covariates for SDM studies typically fall
+under four categories: (1) creating a set of uncorrelated covariates
+from a larger expert-chosen group of 15-30 covariates, using correlation
+analyses and/or variance inflation factors (VIF's) \citep{Dormann2013},
+(2) using principal component analysis (PCA) to reduce dimensionality of
+a set of covariates \citep{Junior2018}, (3) using expert-opinion to
+select covariates that may be relevant based on the knowledge of the
+focal species biology, physiology and ecological requirements
+\citep{Petitpierre2017, Scherrer2019}, and more recently (4) automated
+statistical model-based covariate selection techniques, such as
+`\emph{embedded methods}', e.g.~RIDGE and LASSO
+\citep{Guisan2002, Guyon2003, Saeys2007, Adde2023}. For a more detailed
+overview of the different variable selection methods, we direct readers
+to several recent reviews on this topic
+\citep{Fois2018, Fourcade2018, Melo-Merino2020}.
+
+While there are guidelines for how to implement these methods
+individually, e.g.~using an \textbar{}\emph{r}\textbar{} \textgreater{}
+0.70 or a VIF \textgreater{} 2-5 as a threshold for removing
+significantly correlated predictors \citep{Dormann2013}, there is
+currently no consensus on which method to use for a particular study
+(but see \citet{Adde2023}). As such, we aimed to demonstrate the
+variation in climatic suitability raster projections and predictive
+accuracy of MaxEnt models calibrated using the different covariate
+selection methods, and discuss the potential implications for model
+inference and possible management programmes based on these inferences.
+To demonstrate, we modelled the potential climatic suitability (i.e.~the
+climatic similarity relative to the climate space occupied in the model
+calibration region) for the invasive insect pest \emph{Diaphorina citri}
+Kuwayama (Asian citrus psyllid) (Hemiptera: Psyllidae), that is native
+to Asia but has become invasive in many non-native regions around the
+world, such as the USA, Brazil and Africa ( \textbf{Insert citations},
+\textbf{Insert a map of global distribution?} ).
 
 \begin{itemize}
+\tightlist
 \item
-  Review current methods used to select variables, e.g.~R2, VIF, PCA,
-  expert opinion, and most recently, automated selection / model-based
-  selection.
-\item
-  Aims of this paper are to show how variable selection can influence
-  model outputs and inferences.
+  Clarke: Can you please insert 1-2 sentences about the impact of ACP
+  and its association with HLB?
 \end{itemize}
 
 \hypertarget{methods-and-materials}{%
 \section{2. Methods and materials}\label{methods-and-materials}}
 
 \hypertarget{species-occurrence-records}{%
-\subsubsection{2.1. Species occurrence
+\subsubsection{Species occurrence
 records}\label{species-occurrence-records}}
 
+\begin{itemize}
+\tightlist
+\item
+  Clarke to add information on where we sourced GPS records - link to
+  key papers, maybe a supplementary table (if required).
+\item
+  How many records do we have?
+\end{itemize}
+
+Spatial autocorrelation is an important factor that may affect model
+outputs. Filtering of species occurrence data may limit the inherent
+biases in the data and improve model quality \citep{Veloz2009}. To avoid
+pseudo-replication, only one occurrence record per 2.5 minute grid cell
+was used for model calibration. Species occurrence datasets were thinned
+using the `\emph{spThin}' package \citep{Aiello-Lammens2015}, and
+spatial autocorrelation analyses were performed using the
+`\emph{ecospat}' package \citep{DiCola2017}. Eighty-eight occurrence
+records were retained to calibrate native-range models. Spatial thinning
+was also performed for the invaded range occurrences, however, there was
+no evidence for spatial autocorrelation. As such, no occurrence records
+were thinned for the invaded-range dataset.
+
 \hypertarget{environmental-predictors}{%
-\subsubsection{2.2. Environmental
+\subsubsection{Environmental
 predictors}\label{environmental-predictors}}
 
 Climate data were obtained by downloading the standard set of 19
-bioclimatic variables from the WorldClim ver. 2.1 database (Fick and
-Hijmans, 2017) (data available at: www.worldclim.org/download. html).
+bioclimatic variables from the WorldClim ver. 2.1 database
+\citep{Fick2017} (data available at: www.worldclim.org/download.html).
 This dataset is representative of annual and seasonal means and
 variation of temperature and precipitation metrics averaged over the
-1950--2000 time period (current climate) at a 2.5 min resolution. These
-variables have been shown to effectively model the climatic suitability
-for non-native insects (e.g., Trethowan et al., 2011).
+1950--2000 time period (current climate) at a 2.5 minute resolution.
+These variables have been shown to effectively model the climatic
+suitability for non-native insects (e.g., \citet{Sutton2022}).
 
 \hypertarget{model-calibration}{%
-\subsubsection{2.3. Model calibration}\label{model-calibration}}
+\subsubsection{Model calibration}\label{model-calibration}}
 
-MaxEnt (ver. 3.4.3) was implemented in the ` dismo' R package (Hijmans
-et al., 2021 ).
+MaxEnt (ver. 3.4.3) was implemented in the `\emph{dismo}' R package
+(\citet{Hijmans2017}).
 
 Given that MaxEnt is a presence/pseudo-absence modelling algorithm,
 model calibration requires a user-defined geographic background to
 sample the climate of representative grid cells where the focal species
 is assumed to be absent (i.e., background points or pseudo-absences).
 Background definition can have a significant effect on model output
-(VanDerWal et al., 2009). The background should ideally represent the
+\citep{VanDerWal2009}. The background should ideally represent the
 geographic areas available to the focal species, omitting areas where
 species absence is due to historical factors, dispersal constraints
-and/or biotic interactions (Sanin and Anderson, 2018). Following Webber
-et al.~(2011), we defined the model background using the Koppen-Geiger
-climate classification system (available at: http://koeppen-geiger.vu-w
-ien.ac.at). Only Koppen-Geiger climate zones that contained at least one
+and/or biotic interactions \citep{Sanin2018}. We defined the model
+background using the Koppen-Geiger climate classification system
+(available at: http://koeppen-geiger.vu-wien.ac.at) \citep{Webber2011}.
+Only Koppen-Geiger climate zones that contained at least one
 native-range occurrence record for D. rubiformis in Australia were used
 as the background area from which background points were drawn for model
-calibration (Fig. 1a). The Koppen-Geiger climate zones were intersected
-with the occurrence records using the ` raster' R package (Hijmans,
-2022). We randomly sampled 10 000 points (the default number used for
-Maxent; Merow et al.~(2013) ) from within this background definition
-using the `dismo' R package (Hijmans et al., 2021).
+calibration (Fig. 1a).
 
-MaxEnt models were parameterised with default settings for multiple
+\begin{itemize}
+\tightlist
+\item
+  Need to update the below with appropriate references to `terra'
+  package
+\end{itemize}
+
+The Koppen-Geiger climate zones were intersected with the occurrence
+records using the ` raster' R package (Hijmans, 2022). We randomly
+sampled 10 000 points (the default number used for Maxent; Merow et
+al.~(2013) ) from within this background definition using the `dismo' R
+package (Hijmans et al., 2021).
+
+MaxEnt models were specified with default settings for multiple
 parameters, including: convergence = 105, maximum number of iterations =
 500 and prevalence = 0.5. The `fade by clamping' option was selected to
 prevent extrapolation well outside the range of climatic values in the
-model training area (Philips et al., 2017 ). Model predictions were
+model training area \citep{Phillips2017}. Model predictions were
 obtained using the `logistic output' to create continuous climatic
 suitability raster layers scaled between 0 (climatically unsuitable) and
 1 (climatically suitable).
 
 \hypertarget{model-evaluation}{%
-\subsubsection{2.4. Model evaluation}\label{model-evaluation}}
+\subsubsection{Model evaluation}\label{model-evaluation}}
 
 Model tuning experiments were applied to the native-range MaxEnt models
 to derive within-sample evaluation metrics to guide the selection of
@@ -398,7 +440,7 @@ parameter configurations relative to the default MaxEnt settings.
 \end{enumerate}
 
 \hypertarget{model-visualisation}{%
-\subsubsection{2.5. Model visualisation}\label{model-visualisation}}
+\subsubsection{Model visualisation}\label{model-visualisation}}
 
 \begin{itemize}
 \tightlist
@@ -408,11 +450,11 @@ parameter configurations relative to the default MaxEnt settings.
   layers?
 \end{itemize}
 
-All modelling and statistical analyses were conducted in R ver. 4.0.3 (R
-Core Team, 2020). All values presented in text are presentedas mean ±
-standard error, unless otherwise stated. A standardised ODMAP methods
-protocol (Overview, Data, Model, Assessment, and Prediction) has been
-completed for this study and can be found in Supplementary File S1.
+All modelling and statistical analyses were conducted in \emph{R} ver.
+4.3.0 \citep{Team2023}. All values presented in text are presented as
+mean ± standard error, unless otherwise stated. A standardised ODMAP
+methods protocol (Overview, Data, Model, Assessment, and Prediction) has
+been completed for this study and can be found in Supplementary File S1.
 ODMAP standardises the reporting of SDM modelling studies to improve
 transparency and reproducibility (Zurell et al., 2020).
 
