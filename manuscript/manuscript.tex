@@ -197,10 +197,10 @@ model \sep
     WORLDCLIM
 \end{keyword}
 \end{frontmatter}
-    \ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[frame hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, sharp corners, boxrule=0pt, enhanced, interior hidden]}{\end{tcolorbox}}\fi
+    \ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, sharp corners, interior hidden, enhanced, boxrule=0pt, breakable, frame hidden]}{\end{tcolorbox}}\fi
 
 \hypertarget{introduction}{%
-\section{1. Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}}
 
 Ecological models are important tools to aid the development and
 implementation of environmental policies and management programmes
@@ -278,10 +278,10 @@ world, such as the USA, Brazil and Africa ( \textbf{Insert citations},
 \end{itemize}
 
 \hypertarget{methods-and-materials}{%
-\section{2. Methods and materials}\label{methods-and-materials}}
+\section{Methods and materials}\label{methods-and-materials}}
 
 \hypertarget{species-occurrence-records}{%
-\subsubsection{Species occurrence
+\subsection{Species occurrence
 records}\label{species-occurrence-records}}
 
 \begin{itemize}
@@ -307,8 +307,7 @@ no evidence for spatial autocorrelation. As such, no occurrence records
 were thinned for the invaded-range dataset.
 
 \hypertarget{environmental-predictors}{%
-\subsubsection{Environmental
-predictors}\label{environmental-predictors}}
+\subsection{Environmental predictors}\label{environmental-predictors}}
 
 Climate data were obtained by downloading the standard set of 19
 bioclimatic variables from the WorldClim ver. 2.1 database
@@ -320,7 +319,7 @@ These variables have been shown to effectively model the climatic
 suitability for non-native insects (e.g., \citet{Sutton2022}).
 
 \hypertarget{model-calibration}{%
-\subsubsection{Model calibration}\label{model-calibration}}
+\subsection{Model calibration}\label{model-calibration}}
 
 MaxEnt (ver. 3.4.3) was implemented in the `\emph{dismo}' R package
 (\citet{Hijmans2017}).
@@ -364,7 +363,7 @@ suitability raster layers scaled between 0 (climatically unsuitable) and
 1 (climatically suitable).
 
 \hypertarget{model-evaluation}{%
-\subsubsection{Model evaluation}\label{model-evaluation}}
+\subsection{Model evaluation}\label{model-evaluation}}
 
 Model tuning experiments were applied to the native-range MaxEnt models
 to derive within-sample evaluation metrics to guide the selection of
@@ -440,7 +439,7 @@ parameter configurations relative to the default MaxEnt settings.
 \end{enumerate}
 
 \hypertarget{model-visualisation}{%
-\subsubsection{Model visualisation}\label{model-visualisation}}
+\subsection{Model visualisation}\label{model-visualisation}}
 
 \begin{itemize}
 \tightlist
@@ -459,10 +458,10 @@ ODMAP standardises the reporting of SDM modelling studies to improve
 transparency and reproducibility (Zurell et al., 2020).
 
 \hypertarget{results}{%
-\section{3. Results}\label{results}}
+\section{Results}\label{results}}
 
 \hypertarget{discussion}{%
-\section{4. Discussion}\label{discussion}}
+\section{Discussion}\label{discussion}}
 
 \hypertarget{declaration-of-competing-interest}{%
 \section{Declaration of Competing

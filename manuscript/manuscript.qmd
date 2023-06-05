@@ -49,7 +49,7 @@ format:
         - Highlight 3
 ---
 
-# 1. Introduction 
+# Introduction 
 
 Ecological models are important tools to aid the development and implementation of environmental policies and management programmes [@Addison2013; @Schuwirth2019; @Sutton2022]. These models are used for conservation planning [@Guisan2013], predicting the establishment and spread of invasive species [@Martin2020], implementing biological control programmes [@Sutton2019b; @Mukherjee2021], and forecasting species responses to environmental change [@Bocedi2014], amongst other applications. Species distribution models (SDM’s) are an example of ecological models that have become increasingly popular in recent years [@Elith2009]. SDM’s typically take the form of correlative or mechanistic models that correlate species presence/absences (or pseudo-absences) to environmental covariates to identify suitable climatic conditions for the study taxon [@Elith2011]. The Maximum Entropy species distribution model (hereafter ‘*MaxEnt*’) is amongst the most popular methods for climate modelling studies and has been shown to perform well compared to alternative modelling algorithms [@Wisz2008; @Phillips2017]. It uses maximum entropy to distinguish between environmental conditions where the focal taxon is present from environmental conditions at sites without confirmed presence records for the taxon [@Elith2011].
 
@@ -67,20 +67,20 @@ While there are guidelines for how to implement these methods individually, e.g.
 
 
 
-# 2. Methods and materials 
+# Methods and materials 
 
-### Species occurrence records
+## Species occurrence records
 
 - Clarke to add information on where we sourced GPS records - link to key papers, maybe a supplementary table (if required).
 - How many records do we have? 
 
 Spatial autocorrelation is an important factor that may affect model outputs. Filtering of species occurrence data may limit the inherent biases in the data and improve model quality [@Veloz2009]. To avoid pseudo-replication, only one occurrence record per 2.5 minute grid cell was used for model calibration. Species occurrence datasets were thinned using the ‘*spThin*’ package [@Aiello-Lammens2015], and spatial autocorrelation analyses were performed using the ‘*ecospat*’ package [@DiCola2017]. Eighty-eight occurrence records were retained to calibrate native-range models. Spatial thinning was also performed for the invaded range occurrences, however, there was no evidence for spatial autocorrelation. As such, no occurrence records were thinned for the invaded-range dataset.
 
-### Environmental predictors
+## Environmental predictors
 
 Climate data were obtained by downloading the standard set of 19 bioclimatic variables from the WorldClim ver. 2.1 database [@Fick2017] (data available at: www.worldclim.org/download.html). This dataset is representative of annual and seasonal means and variation of temperature and precipitation metrics averaged over the 1950–2000 time period (current climate) at a 2.5 minute resolution. These variables have been shown to effectively model the climatic suitability for non-native insects (e.g., @Sutton2022). 
 
-### Model calibration 
+## Model calibration 
 
 MaxEnt (ver. 3.4.3) was implemented in the ‘*dismo*’ R package (@Hijmans2017).
 
@@ -92,7 +92,7 @@ The Koppen-Geiger climate zones were intersected with the occurrence records usi
 
 MaxEnt models were specified with default settings for multiple parameters, including: convergence = 105, maximum number of iterations = 500 and prevalence = 0.5. The ‘fade by clamping’ option was selected to prevent extrapolation well outside the range of climatic values in the model training area [@Phillips2017]. Model predictions were obtained using the ‘logistic output’ to create continuous climatic suitability raster layers scaled between 0 (climatically unsuitable) and 1 (climatically suitable).
 
-### Model evaluation 
+## Model evaluation 
 
 Model tuning experiments were applied to the native-range MaxEnt models to derive within-sample evaluation metrics to guide the selection of optimal MaxEnt parameter configurations (feature classes and regularisation multipliers). Optimised parameter configurations would then be used to refit the MaxEnt models before being projected into a novel geographic region and making projections of climatic suitability for D. rubiformis . Model tuning was performed by building MaxEnt models with varying (1) feature class combinations (H = Hinge only, L = Linear only, LQ = Linear and Quadratic and LQH = Linear, Quadratic and Hinge features) and (2) regularisation multipliers (1:8). In total, 32 MaxEnt models were specified. Native-range model performance and optimal parameter configurations were assessed using 4-fold spatial block cross validation using ‘ENMeval’ (Kass et al., 2021). 
 
@@ -108,7 +108,7 @@ We specified five final MaxEnt models, four models calibrated with FC and RM val
 
 (4) The Akaike Information Criterion corrected for small sample sizes (AICc) criterion simultaneously scores models according to their complexity and goodness-of-fit. AICc was used as the primary evaluation metric as it is calculated using MaxEnt models built using the entire species occurrence dataset (i.e. all the occurrence points in the native-range), unlike AUC and OR10 (and numerous other metrics frequently used for model evaluation) which may be spatially biased due to the partitioning of the species occurrence dataset into training and evaluation sets (Sanin and Anderson, 2018). Optimal parameter configurations were determined by selecting model configurations which produced the lowest value for AICc (i.e., AICc=0; following Kass et al. (2021)).
 
-### Model visualisation 
+## Model visualisation 
 
 - Need to discuss how we map the different rasters, and maybe how we quantified the difference in suitability projections between climate layers? 
 
@@ -118,10 +118,10 @@ We specified five final MaxEnt models, four models calibrated with FC and RM val
 All modelling and statistical analyses were conducted in *R* ver. 4.3.0 [@Team2023]. All values presented in text are presented as mean ± standard error, unless otherwise stated. A standardised ODMAP methods protocol (Overview, Data, Model, Assessment, and Prediction) has been completed for this study and can be found in Supplementary File S1. ODMAP standardises the reporting of SDM modelling studies to improve transparency and reproducibility (Zurell et al., 2020).
 
 
-# 3. Results
+# Results
 
 
-# 4. Discussion 
+# Discussion 
 
 
 
