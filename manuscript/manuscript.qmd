@@ -28,8 +28,10 @@ author:
 abstract: |
   This is the abstract. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum augue turpis, dictum non malesuada a, volutpat eget velit. Nam placerat turpis purus, eu tristique ex tincidunt et. Mauris sed augue eget turpis ultrices tincidunt. Sed et mi in leo porta egestas. Aliquam non laoreet velit. Nunc quis ex vitae eros aliquet auctor nec ac libero. Duis laoreet sapien eu mi luctus, in bibendum leo molestie. Sed hendrerit diam diam, ac dapibus nisl volutpat vitae. Aliquam bibendum varius libero, eu efficitur justo rutrum at. Sed at tempus elit.
 keywords: 
-  - keyword1
-  - keyword2
+  - Species distribution model
+  - Variable selection
+  - Ecological model
+  - WORLDCLIM
 date: last-modified
 bibliography: bibliography.bib
 format:
@@ -63,13 +65,18 @@ In recent years, a number of studies have investigated and demonstrated that com
 
 ### 2.1. Species occurrence records
 
+- Clarke to add information on where we sourced GPS records - link to key papers, maybe a supplementary table (if required).
+- How many records do we have? 
+
+Spatial autocorrelation is an important factor that may affect model outputs. Filtering of species occurrence data may limit the inherent biases in the data and improve model quality (Veloz, 2009). To avoid pseudo-replication, only one occurrencenrecord per 2.5 min grid cell was used for model calibration. Species occurrence datasets were thinned using the ‘*spThin*’ package [@Aiello-Lammens2015], and spatial autocorrelation analyses were performed using the ‘*ecospat*’ package [@DiCola2017]. Eighty-eight occurrence records were retained to calibrate native-range models. Spatial thinning was also performed for the invaded range occurrences, however, there was no evidence for spatial autocorrelation. As such, no occurrence records were thinned for the invaded-range dataset.
+
 ### 2.2. Environmental predictors
 
-Climate data were obtained by downloading the standard set of 19 bioclimatic variables from the WorldClim ver. 2.1 database (Fick and Hijmans, 2017) (data available at: www.worldclim.org/download. html). This dataset is representative of annual and seasonal means and variation of temperature and precipitation metrics averaged over the 1950–2000 time period (current climate) at a 2.5 min resolution. These variables have been shown to effectively model the climatic suitability for non-native insects (e.g., Trethowan et al., 2011). 
+Climate data were obtained by downloading the standard set of 19 bioclimatic variables from the WorldClim ver. 2.1 database [@Fick2017] (data available at: www.worldclim.org/download.html). This dataset is representative of annual and seasonal means and variation of temperature and precipitation metrics averaged over the 1950–2000 time period (current climate) at a 2.5 minute resolution. These variables have been shown to effectively model the climatic suitability for non-native insects (e.g., @Sutton2022). 
 
 ### 2.3. Model calibration 
 
-MaxEnt (ver. 3.4.3) was implemented in the ‘ dismo’ R package (Hijmans et al., 2021 ).
+MaxEnt (ver. 3.4.3) was implemented in the ‘*dismo*’ R package (@Hijmans2017).
 
 Given that MaxEnt is a presence/pseudo-absence modelling algorithm, model calibration requires a user-defined geographic background to sample the climate of representative grid cells where the focal species is assumed to be absent (i.e., background points or pseudo-absences). Background definition can have a significant effect on model output (VanDerWal et al., 2009). The background should ideally represent the geographic areas available to the focal species, omitting areas where species absence is due to historical factors, dispersal constraints and/or biotic interactions (Sanin and Anderson, 2018). Following Webber et al. (2011), we defined the model background using the Koppen-Geiger climate classification system (available at: http://koeppen-geiger.vu-w ien.ac.at). Only Koppen-Geiger climate zones that contained at least one native-range occurrence record for D. rubiformis in Australia were used as the background area from which background points were drawn for model calibration (Fig. 1a). The Koppen-Geiger climate zones were intersected with the occurrence records using the ‘ raster’ R package (Hijmans, 2022). We randomly sampled 10 000 points (the default number used for Maxent; Merow et al. (2013) ) from within this background definition using the ‘dismo’ R package (Hijmans et al., 2021).
 
